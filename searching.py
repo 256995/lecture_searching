@@ -1,4 +1,5 @@
 import os
+import json
 
 # get current working directory path
 cwd_path = os.getcwd()
@@ -11,11 +12,19 @@ def read_data(file_name, field):
     :param field: (str), field of a dict to return
     :return: (list, string),
     """
+    if field not in {"unordered_numbers", "ordered_numbers", "dna_sequence"}:
+        return None
+
     file_path = os.path.join(cwd_path, file_name)
+    with open(file_path, "r") as json_file:
+        data = json.load(json_file)
+    print(data)
+    return data[field]
 
 
 def main():
-    pass
+    unordered_numbers = read_data("sequential.json", "unordered_numbers")
+    print(unordered_numbers)
 
 
 if __name__ == '__main__':

@@ -18,7 +18,6 @@ def read_data(file_name, field):
     file_path = os.path.join(cwd_path, file_name)
     with open(file_path, "r") as json_file:
         data = json.load(json_file)
-    print(data)
     return data[field]
 
 
@@ -59,13 +58,38 @@ def pattern_search(sequence, my_pattern):
     return result
 
 
+def binary_search(sequence, my_number):
+    """
+    binary search on my_number in sequence
+    :param sequence: list (ordered)
+    :param my_number: float
+    :return: position
+    """
+    left = 0
+    right = len(sequence) - 1
+    middle = int(len(sequence) / 2)
+    while left < right:
+        if sequence[middle] == my_number:
+            return middle
+        if sequence[middle] > my_number:
+            right = middle - 1
+            middle = left + int((right - left) / 2)
+        else:
+            left = middle + 1
+            middle = left + int((right - left) / 2)
+    if middle != my_number:
+        return None
+
+
 def main():
     unordered_numbers = read_data("sequential.json", "unordered_numbers")
     print(unordered_numbers)
     my_number_in_sequence = linear_search(unordered_numbers, 0)
     print(my_number_in_sequence)
-    my_pattern_in_sequence = pattern_search(read_data("sequential.json", "dna_sequence"), "AAG")
+    my_pattern_in_sequence = pattern_search(read_data("sequential.json", "dna_sequence"), "GCA")
     print(my_pattern_in_sequence)
+    my_number_in_ordered_sequence = binary_search(read_data("sequential.json", "ordered_numbers"), 78)
+    print(my_number_in_ordered_sequence)
 
 
 if __name__ == '__main__':

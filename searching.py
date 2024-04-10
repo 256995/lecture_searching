@@ -25,6 +25,7 @@ def read_data(file_name, field):
 def main():
     unordered_numbers = read_data("sequential.json", "unordered_numbers")
     print(unordered_numbers)
+    print("pokus!!!")
 
 
 if __name__ == '__main__':

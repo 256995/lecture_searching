@@ -22,10 +22,26 @@ def read_data(file_name, field):
     return data[field]
 
 
+def linear_search(sequence, my_number):
+    """
+    search number in sequence
+    :param sequence: list
+    :param my_number: float
+    :return:
+    """
+    results = {"positions": [], "count": 0}
+    for idx in range(len(sequence)):
+        if sequence[idx] == my_number:
+            results["positions"].append(idx)
+            results["count"] = results["count"] + 1
+    return results
+
+
 def main():
     unordered_numbers = read_data("sequential.json", "unordered_numbers")
     print(unordered_numbers)
-    print("pokus!!!")
+    number_in_sequence = linear_search(unordered_numbers, 0)
+    print(number_in_sequence)
 
 
 if __name__ == '__main__':
